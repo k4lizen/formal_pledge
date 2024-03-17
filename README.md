@@ -46,8 +46,8 @@ def get_libc_send_payload(payload):
 exe = './junior_formatter'
 elff = context.binary = ELF(exe, checksec=False)
 context.log_level = 'debug'
-context.terminal = ['tmux', 'split', '-h']
 
 # python exploit.py REMOTE 52.59.124.14 5031
 # python exploit.py 
 formal_pledge.getlibc.run(get_libc_send_payload, elff)
+```
