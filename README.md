@@ -1,6 +1,6 @@
 # formal_pledge
 
-Have a format string vulnerability? Need the remote LIBC version? Fret not! **formal_pledge** looks for the __libc_start_main return from main, and checks its address against an offset database it builds using [libc-database](https://github.com/niklasb/libc-database) and pwntools [libc_start_main_return](https://docs.pwntools.com/en/stable/elf/elf.html#pwnlib.elf.elf.ELF.libc_start_main_return).
+Have a format string vulnerability? Need the remote LIBC version? Fret not! **formal_pledge** looks for the `__libc_start_main` return from main, and checks its address against an offset database it builds using [libc-database](https://github.com/niklasb/libc-database) and pwntools [libc_start_main_return](https://docs.pwntools.com/en/stable/elf/elf.html#pwnlib.elf.elf.ELF.libc_start_main_return).
 
 # Install
 ```bash
