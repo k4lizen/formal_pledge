@@ -4,8 +4,6 @@ import os
 from .common import read_offsets_file, get_libc_folder, get_libcs, libc_name_to_path
 from .calc_offsets import calculate_offsets
 
-context.log_level = 'critical'
-
 def get_libcs_with_offset_exact(offset_data, offset):
     good_libcs = []
     for libc in offset_data:
@@ -42,6 +40,9 @@ def get_libc_start_in_process(p):
 # 2. the ELF() vuln file
 # 3. %{max_distance}$x
 def run(fmt_exec_function, elff, max_distance=100):
+    saved_log_level = context.log_level
+    context.log_level = 'critical'
+    
     test_payload = b'NY4AA~'
     testout, testp = fmt_exec_function(test_payload)
     # if testp.aslr:
@@ -66,8 +67,6 @@ def run(fmt_exec_function, elff, max_distance=100):
     offset_data = read_offsets_file()
 
     context.arch = elff.arch
-    saved_log_level = context.log_level
-    context.log_level = 'critical'
 
     # libc_return_offset = elff.libc.libc_start_main_return
     # print('ret!: ', hex(libc_return_offset))
