@@ -36,7 +36,7 @@ def calc_append():
     
     all_files = get_libcs()
     if len(all_files) == len(saved_libc_offsets):
-        print('Everything inplace. Done.')
+        print('Everything in-place. Done.')
         return
 
     print('Clearing pwntools context.')
