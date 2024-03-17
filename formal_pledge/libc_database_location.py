@@ -1,0 +1,1 @@
+libc_database_folder="/opt/libc-database/db/"

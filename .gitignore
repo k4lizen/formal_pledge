@@ -1,0 +1,7 @@
+calculator/*
+notes.txt
+.gdb_history
+**/__pycache__/**
+formal_pledge.egg-info
+dist/*
+build/*
