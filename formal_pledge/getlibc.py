@@ -66,6 +66,7 @@ def run(fmt_exec_function, elff, max_distance=100):
     print('=' * 40)
     offset_data = read_offsets_file()
 
+    context.log_level = 'critical' # since context gets cleared in calculate_offsets()
     context.arch = elff.arch
 
     # libc_return_offset = elff.libc.libc_start_main_return
