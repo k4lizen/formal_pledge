@@ -6,12 +6,9 @@ Have a format string vulnerability? Need the remote LIBC version? Fret not! **fo
 ```bash
 git clone https://github.com/k4lizen/formal_pledge.git
 cd formal_pledge
-python setup.py bdist_wheel
-pip install dist/*
+pip install -e .
 ```
-If you have multiple files in `dist/` install the latest version.
-
-Then edit the `libc_database_location.py` file **in the installation directory** to set the [libc-database](https://github.com/niklasb/libc-database) location. The installation directory will be printed after trying to run the library with an invalid path in `libc_database_location.py`.
+Then edit the `libc_database_location.py` file to set the [libc-database](https://github.com/niklasb/libc-database) database location.
 
 # Usage
 ```python
@@ -21,7 +18,7 @@ formal_pledge.getlibc.run(exec_function, binary_elf)
 ```
 `exec_function` is a function which takes the payload as the only parameter and returns the string the program returns, along with the process. `formal_pledge` will take care of closing the process.
 
-On the first run, the `offsets.txt` file will be generated in the **installation directory**, this step is skipped in subsequent runs.
+On the first run, the `offsets.txt` file will be generated, this step is skipped in subsequent runs.
 
 ## Example
 Can also be seen/run in the `example` directory.
