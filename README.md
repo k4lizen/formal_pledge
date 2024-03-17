@@ -8,7 +8,7 @@ git clone https://github.com/k4lizen/formal_pledge.git
 cd formal_pledge
 pip install -e .
 ```
-Then edit the `libc_database_location.py` file to set the [libc-database](https://github.com/niklasb/libc-database) database location.
+Then edit the `formal_pledge/libc_database_location.py` file to set the [libc-database](https://github.com/niklasb/libc-database) database location.
 
 # Usage
 ```python
@@ -16,9 +16,11 @@ import formal_pledge
 # ...
 formal_pledge.run(exec_function, binary_elf)
 ```
-`exec_function` is a function which takes the payload as the only parameter and returns the string the program returns, along with the process. `formal_pledge` will take care of closing the process.
+`exec_function` is a function which takes the payload as the only parameter. Returns the printed format string and the process object (see example). `formal_pledge` will take care of closing the process.
 
-On the first run, the `offsets.txt` file will be generated, this step is skipped in subsequent runs.
+If a `process()` is supplied, exact offset will be calculated with [pwntools elf.libs()](https://docs.pwntools.com/en/stable/elf/elf.html#pwnlib.elf.elf.ELF.libs), otherwise if the object is `remote()` only the last 12 bits of the address will be compared.
+
+On the first run, the `offsets.txt` file may need to be populated, this step is skipped in subsequent runs (unless new libc files are added to the database).
 
 ## Example
 Can also be seen/run in the `example` directory.
