@@ -5,3 +5,4 @@ notes.txt
 formal_pledge.egg-info
 dist/*
 build/*
+formal_pledge/offsets.txt
