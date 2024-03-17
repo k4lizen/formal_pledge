@@ -48,3 +48,9 @@ context.log_level = 'debug'
 # python exploit.py 
 formal_pledge.getlibc.run(get_libc_send_payload, elff)
 ```
+To run:
+```bash
+cd example
+chmod +x junior_formatter
+python exploit.py
+```
