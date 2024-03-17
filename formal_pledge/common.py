@@ -4,7 +4,7 @@ from inspect import getsourcefile
 
 import tomllib
 
-from .libc_database_location import libc_database_folder
+from formal_pledge.libc_database_location import libc_database_folder
 
 def offsets_path():
     return adj_file('offsets.txt')

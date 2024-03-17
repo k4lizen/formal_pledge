@@ -2,7 +2,7 @@ from pwn import *
 from os.path import isfile, isdir
 import shutil
 
-from .common import read_offsets_file, get_libc_folder, get_libcs, libc_name_to_path, offsets_path, tmp_offsets_path, adj_file
+from formal_pledge.common import read_offsets_file, get_libc_folder, get_libcs, libc_name_to_path, offsets_path, tmp_offsets_path, adj_file
 
 context.log_level = 'critical'
 libc_folder = get_libc_folder()
