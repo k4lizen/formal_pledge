@@ -56,3 +56,7 @@ cd example
 chmod +x junior_formatter
 python exploit.py
 ```
+
+#### TODO
+Add a function that generates a format string payload that leaks: binary, heap, stack, libc. And returns the offsets
+to their base. The function should print the code that should be used for the leak.
