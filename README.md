@@ -14,7 +14,7 @@ Then edit the `libc_database_location.py` file to set the [libc-database](https:
 ```python
 import formal_pledge
 # ...
-formal_pledge.getlibc.run(exec_function, binary_elf)
+formal_pledge.run(exec_function, binary_elf)
 ```
 `exec_function` is a function which takes the payload as the only parameter and returns the string the program returns, along with the process. `formal_pledge` will take care of closing the process.
 
@@ -46,7 +46,7 @@ context.log_level = 'debug'
 
 # python exploit.py REMOTE 52.59.124.14 5031
 # python exploit.py 
-formal_pledge.getlibc.run(get_libc_send_payload, elff)
+formal_pledge.run(get_libc_send_payload, elff)
 ```
 To run:
 ```bash
