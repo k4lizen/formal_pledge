@@ -4,7 +4,9 @@ import os
 from formal_pledge.common import read_offsets_file
 from formal_pledge.calc_offsets import calculate_offsets
 
-def get_libcs_with_offset_exact(offset_data, offset):
+offset_data = read_offsets_file()
+
+def get_libcs_with_offset_exact(offset):
     good_libcs = []
     for libc in offset_data:
         lib_offset = offset_data[libc]
@@ -15,7 +17,7 @@ def get_libcs_with_offset_exact(offset_data, offset):
     return good_libcs
 
 # just like in https://github.com/niklasb/libc-database
-def get_libcs_with_address_12bit(offset_data, address):
+def get_libcs_with_address_12bit(address):
     good_libcs = []
     for libc in offset_data:
         lib_offset = offset_data[libc]
@@ -39,7 +41,7 @@ def get_libc_start_in_process(p):
 # the process needs to have aslr turned off
 # 2. the ELF() vuln file
 # 3. %{max_distance}$x
-def run(fmt_exec_function, elff, max_distance=100):
+def libcv(fmt_exec_function, elff, max_distance=100):
     saved_log_level = context.log_level
     context.log_level = 'critical'
     
@@ -64,7 +66,6 @@ def run(fmt_exec_function, elff, max_distance=100):
     print('Checking offsets.')
     calculate_offsets()
     print('=' * 40)
-    offset_data = read_offsets_file()
 
     context.log_level = 'critical' # since context gets cleared in calculate_offsets()
     context.arch = elff.arch
@@ -92,7 +93,7 @@ def run(fmt_exec_function, elff, max_distance=100):
         possible_libcs = []
 
         if is_remote:
-            possible_libcs = get_libcs_with_address_12bit(offset_data, address)
+            possible_libcs = get_libcs_with_address_12bit(address)
 
             if possible_libcs != []:
                 possible_libcs_with_offset = []
@@ -102,7 +103,7 @@ def run(fmt_exec_function, elff, max_distance=100):
         else:
             libc_start = get_libc_start_in_process(p)
             offset = address - libc_start
-            possible_libcs = get_libcs_with_offset_exact(offset_data, offset)
+            possible_libcs = get_libcs_with_offset_exact(offset)
 
             if possible_libcs != []:
                 print(f'string: "%{i}$p"\noffset: {hex(offset)}\nlibcs: {possible_libcs}\n' + '-' * 20)
