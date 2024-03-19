@@ -35,10 +35,10 @@ formal_pledge.leak(exec_function, binary_elf)
 ```
 `exec_function` is a function which takes the payload as the only parameter. Returns the printed format string and the process object (see example). `formal_pledge` will take care of closing the process. The process needs to be local and have ASLR turned off.
 
-To check which address belongs to which region (if any), some heuristic about usual binary and stack placement is used, while libc is targeted using [pwntools elf.libs()](https://docs.pwntools.com/en/stable/elf/elf.html#pwnlib.elf.elf.ELF.libs).
+To check which address belongs to which region (if any), some heuristic about usual binary and stack placement is used (located in `formal_pledge/leak_regions.py`), while libc is targeted using [pwntools elf.libs()](https://docs.pwntools.com/en/stable/elf/elf.html#pwnlib.elf.elf.ELF.libs).
 
 # Examples
-Can also be seen/run in the `example` directory.
+Can be seen/run in the `example/` directory.
 ## Leaking LIBC Remote Version
 ```python
 from pwn import *
