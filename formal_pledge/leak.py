@@ -77,6 +77,8 @@ def leak(fmt_exec_function, elff, max_distance=100):
         except:
             continue
 
+        # print(f"{i}: {hex(address)}")
+
         region, r_offset = get_region(address, elff.bits, p)
 
         match region:
